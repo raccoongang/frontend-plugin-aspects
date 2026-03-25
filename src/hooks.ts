@@ -96,6 +96,7 @@ export const useChildBlockCounts = (usageKey: string) : { data: BlockResponse | 
     queryKey: ['child-blocks', usageKey],
     queryFn: async () => getAuthenticatedHttpClient().get(url.toString()),
     select: (response: { data: BlockResponse }) => (response.data),
+    retry: false,
   });
 };
 

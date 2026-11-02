@@ -8,6 +8,7 @@ import {
 } from '@openedx/paragon/icons';
 import { BlockTypes, ICON_MAP } from '../../constants';
 import { useAspectsSidebarContext } from '../../hooks';
+import '../../styles.css';
 
 import messages from '../../messages';
 import { CourseContentList } from './CourseContentList';
@@ -90,7 +91,7 @@ export function AspectsSidebar({
   return (
     <div className="w-100 h-100" data-testid="sidebar">
       <Sticky className="shadow rounded" offset={2}>
-        <div className="bg-white rounded w-100">
+        <div className="aspects-sidebar-content bg-white rounded w-100" data-testid="sidebar-content">
           <Stack className="sidebar-header">
             <Stack className="course-unit-sidebar-header px-4 pt-4" direction="horizontal">
               <h5 className="course-unit-sidebar-header-title h5 flex-grow-1 text-gray">

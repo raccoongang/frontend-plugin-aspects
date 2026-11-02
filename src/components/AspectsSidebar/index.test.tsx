@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { BlockTypes } from '../../constants';
 import { AspectsSidebar, ContentList } from '.';
@@ -137,6 +139,17 @@ describe('AspectsSidebar', () => {
 
     // Assert that the sidebar is no longer visible
     expect(screen.queryByTestId('sidebar')).not.toBeInTheDocument();
+  });
+
+  it('keeps the sidebar content scrollable within the viewport', () => {
+    // Jest stubs CSS imports, so attach the real stylesheet to check the rule itself.
+    const styles = document.createElement('style');
+    styles.textContent = readFileSync(join(__dirname, '../../styles.css'), 'utf8');
+    document.head.appendChild(styles);
+    renderComponent();
+
+    expect(screen.getByTestId('sidebar-content')).toHaveStyle({ maxHeight: 'calc(100vh - 1rem)', overflowY: 'auto' });
+    styles.remove();
   });
 
   it('shows the back button and changes the title when a block is clicked', () => {
